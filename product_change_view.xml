@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- product -->
+        <record id="view_expense_category_product" model="ir.ui.view">
+            <field name="name">expense.category.product.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+           		
+           		<xpath expr="//separator[@string='Description for Suppliers']" position="attributes">
+           			<attribute name="invisible">True</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='description_purchase']" position="replace">
+                </xpath>
+                
+                <xpath expr="//field[@name='description']" position="attributes">
+                	<attribute name="invisible">True</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='list_price']" position="before">
+                	<field name="saleprice_method" on_change="onchange_pricecategory(saleprice_method, standard_price)"/>
+                </xpath>
+                
+                <xpath expr="//field[@name='description']" position="before">
+                	<separator string="Description for Suppliers"/>
+                	<field name="description_purchase"/>
+                </xpath>
+                
+            </field>
+        </record>
+        
+        <!--         Internal Reference Field -Product -->
+        <record id="caremed_product_template_inherit" model="ir.ui.view">
+            <field name="name">caremed.product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">                  
+                <xpath expr="//field[@name='default_code']" position="attributes">
+                    <attribute name="string">Product Code</attribute>
+                </xpath>                
+            </field>
+        </record>
+        
+        <record id="caremed_product_form_inherit" model="ir.ui.view">
+            <field name="name">caremed.product.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">                  
+                <xpath expr="//field[@name='default_code']" position="attributes">
+                    <attribute name="string">Product Code</attribute>
+                </xpath>                
+            </field>
+        </record>
+       
+        </data>
+</openerp>
